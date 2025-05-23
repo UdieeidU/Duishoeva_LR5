@@ -6,8 +6,16 @@ using namespace std;
 
 bool UserInput(string input) {
     if (input.empty()) return false;
+
+    // Проверяем, что все символы — цифры
+    for (char c : input) {
+        if (!isdigit(c)) return false;
+    }
+
+    // Теперь преобразуем в число
     try {
         int number = stoi(input);
+        if (number < 0) return false; // дополнительно, хотя по предыдущей проверке минус не пройдет
     } catch (...) {
         return false;
     }
@@ -26,5 +34,5 @@ void EnterDigit(int& varLink, const string& label) {
 }
 
 int CalcRectangleArea(int NumberA, int NumberB) {
-    return NumberA * NumberB + 10;  // your modified failing version
+    return NumberA * NumberB;
 }
