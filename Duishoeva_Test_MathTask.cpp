@@ -16,7 +16,29 @@ void testCalcRectangleArea() {
 int main() {
     suite s;
     s.push_back(CUTE(testCalcRectangleArea));
+    s.push_back(CUTE(testEmptyString));
+    s.push_back(CUTE(testNonDigitCharacters));
+    s.push_back(CUTE(testDigitLetterMix));
+    s.push_back(CUTE(testNegativeNumbers));
+
     ide_listener<> listener;
-    makeRunner(listener)(s, "Test CalcRectangleArea");
+    makeRunner(listener)(s, "All tests");
+
     return 0;
+}
+
+void testEmptyString() {
+    ASSERT(!UserInput("")); // empty string should return false
+}
+
+void testNonDigitCharacters() {
+    ASSERT(!UserInput("abc")); // non-digit chars only -> false
+}
+
+void testDigitLetterMix() {
+    ASSERT(!UserInput("12a3")); // digits mixed with letters -> false
+}
+
+void testNegativeNumbers() {
+    ASSERT(!UserInput("-5")); // negative number -> false
 }
